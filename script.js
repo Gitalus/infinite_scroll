@@ -12,15 +12,15 @@ function imageLoaded() {
     if (imagesLoaded === totalImages) {
         ready = true;
         loader.hidden = true;
-        count = 30;
-        const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
+        imageCount = 30;
+        const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&imageCount=${imageCount}`;
     }
 }
 
-// Unsplash
-let count = 5;
+// Unsplash API
+let imageCount = 5;
 const apiKey = 'SO3G6ub-m4M9CnewVAoA_Py_CVaL9q9AYx1RfKhc1yM';
-const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
+const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&imageCount=${imageCount}`;
 
 // Helper function to set attributes on DOM elements
 function setAttributes(element, attributes) {
