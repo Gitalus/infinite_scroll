@@ -5,6 +5,16 @@ let ready = false;
 let imagesLoaded = 0;
 let totalImages = 0;
 let photosArray = [];
+let isInitialLoad = true
+
+// Unsplash API
+let initialCount = 30;
+const apiKey = 'SO3G6ub-m4M9CnewVAoA_Py_CVaL9q9AYx1RfKhc1yM';
+let apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${initialCount}`;
+
+function updateAPIUrlWithNewCount(picCount) {
+    apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}&count=${picCount}`;
+}
 
 // Check if all images were loaded
 function imageLoaded() {
@@ -12,15 +22,8 @@ function imageLoaded() {
     if (imagesLoaded === totalImages) {
         ready = true;
         loader.hidden = true;
-        imageCount = 30;
-        const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${imageCount}`;
     }
 }
-
-// Unsplash API
-let imageCount = 5;
-const apiKey = 'SO3G6ub-m4M9CnewVAoA_Py_CVaL9q9AYx1RfKhc1yM';
-const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${imageCount}`;
 
 // Helper function to set attributes on DOM elements
 function setAttributes(element, attributes) {
@@ -64,6 +67,10 @@ async function getPhotos() {
         const response = await fetch(apiUrl);
         photosArray = await response.json();
         displayPhotos();
+        if (isInitialLoad) {
+            updateAPIURLWithNewCount(30);
+            isInitialLoad = false;
+        }
     } catch (error) {
         // Catch error
     }
